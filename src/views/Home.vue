@@ -1,7 +1,8 @@
 <script setup>
-// import ButtonRepo from '@/components/ButtonRepo.vue'
+import AssetsPanle from '../components/AssetsPanel.vue'
 </script>
 
 <template>
-  <div>home page</div>
+  <AssetsPanle />
 </template>
+<style scoped></style>
