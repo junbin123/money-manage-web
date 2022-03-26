@@ -1,6 +1,10 @@
-<script setup>
-import { ElContainer, ElAside, ElMain, ElDialog } from 'element-plus'
-import { ref } from 'vue'
+<script>
+// import { ElContainer, ElAside, ElMain, ElDialog } from 'element-plus'
+export default {
+  name: 'App',
+  // components: { ElContainer, ElAside, ElMain, ElDialog },
+  setup() {},
+}
 </script>
 
 <template>

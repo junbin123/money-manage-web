@@ -11,7 +11,8 @@
         <div
           v-for="item in menuList"
           :key="item.title"
-          class="px-2 text-base flex items-center hover:bg-slate-100 h-10 rounded-md mb-2"
+          class="px-2 text-base flex items-center hover:bg-slate-200 h-10 rounded-md mb-2"
+          :class="{ 'bg-[#FFCEAE]': item.name === currentMenu }"
           @click="handleMenu(item)"
         >
           <div :class="['iconfont', item.icon, 'menu-icon']"></div>
@@ -24,8 +25,8 @@
       <div
         v-for="item in settingList"
         :key="item.title"
-        class="px-2 text-sm flex items-center hover:bg-slate-100 h-8 rounded-md mb-1"
-        @click="handleSetting(item)"
+        class="px-2 text-sm flex items-center hover:bg-slate-200 h-8 rounded-md mb-1"
+        @click="ElMessage('coming soon...')"
       >
         <div :class="['iconfont', item.icon]"></div>
         <div class="pl-1">{{ item.title }}</div>
@@ -38,6 +39,7 @@
 import { Plus } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 const router = useRouter()
 const menuList = [
   {
@@ -65,6 +67,7 @@ const menuList = [
     path: '/assets',
   },
 ]
+const currentMenu = ref('home')
 
 const settingList = [
   {
@@ -84,12 +87,8 @@ const settingList = [
   },
 ]
 
-function handleSetting() {
-  ElMessage('coming soon...')
-}
-
 function handleMenu(item) {
-  console.log(item)
+  currentMenu.value = item.name
   router.push(item.path)
 }
 </script>
