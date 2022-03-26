@@ -12,7 +12,7 @@
           v-for="item in menuList"
           :key="item.title"
           class="px-2 text-base flex items-center hover:bg-slate-200 h-10 rounded-md mb-2"
-          :class="{ 'bg-[#FFCEAE]': item.name === currentMenu }"
+          :class="{ 'bg-[#D0E2FF]': item.name === currentMenu }"
           @click="handleMenu(item)"
         >
           <div :class="['iconfont', item.icon, 'menu-icon']"></div>

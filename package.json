@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "element-plus": "^2.1.4",
     "vue": "^3.2.31",
     "vue-router": "^4.0.12"
@@ -23,8 +24,8 @@
     "autoprefixer": "^10.4.2",
     "prettier-plugin-tailwindcss": "^0.1.7",
     "tailwindcss": "^3.0.23",
-    "vite": "^2.8.4",
     "unplugin-auto-import": "^0.6.6",
-    "unplugin-vue-components": "^0.18.4"
+    "unplugin-vue-components": "^0.18.4",
+    "vite": "^2.8.4"
   }
 }
