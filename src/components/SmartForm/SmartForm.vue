@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <el-form label-width="7rem" class="flex flex-wrap">
+    <el-form label-width="7rem" class="flex flex-wrap flex-col">
       <el-form-item
         v-for="key in formList"
         :key="key"
@@ -9,8 +9,8 @@
       >
         <FormItem v-model="formValues[key]" :column="columns[key]" @onChange="handleChangeForm" />
       </el-form-item>
-      <div class="pl-5">
-        <el-button type="primary" @click="onSubmit">搜索</el-button>
+      <div class="form-item-box flex justify-end">
+        <el-button class="w-20" type="primary" @click="onSubmit">搜索</el-button>
       </div>
     </el-form>
   </div>
@@ -50,7 +50,10 @@ export default {
     },
   },
   methods: {
-    handleChangeForm({ key, value }) {},
+    handleChangeForm({ key, value }) {
+      console.log('handleChangeForm', { key, value })
+      // this.$emit('onSubmit', this.formValues)
+    },
     onSubmit() {
       this.$emit('onSubmit', this.formValues)
     },

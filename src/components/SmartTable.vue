@@ -1,52 +1,51 @@
 <template>
-  <div>
+  <div class="pb-4 pt-6">
     <SmartForm
-      v-model:value="formValues"
+      :value="filterValues"
       :columns="columns"
-      :formList="formList"
+      :formList="filterList"
       @onSubmit="onFormSubmit"
     />
   </div>
-  
+  <div class="w-full px-4">
+    <el-table :data="tableData" border>
+      <el-table-column
+        v-for="tableKey in tableList"
+        :key="tableKey"
+        :prop="tableKey"
+        :label="columns[tableKey].label"
+      />
+    </el-table>
+  </div>
 </template>
 
 <script setup>
 import SmartForm from './SmartForm/SmartForm.vue'
 import { ref } from 'vue'
-const formValues = ref({
-  time: '',
-  type: '',
+
+defineProps({
+  columns: {
+    type: Object,
+    default: () => ({}),
+  },
+  filterValues: {
+    type: Object,
+    default: () => ({}),
+  },
+  filterList: {
+    type: Array,
+    default: () => [],
+  },
+  tableData: {
+    type: Array,
+    default: () => [],
+  },
+  tableList: {
+    type: Array,
+    default: () => [],
+  },
 })
-const columns = {
-  time: {
-    label: '选择月份',
-    formType: 'date-picker',
-    key: 'time',
-    form: {
-      type: 'month',
-      placeholder: '请选择月份',
-    },
-  },
-  type: {
-    label: '账单类型',
-    formType: 'select',
-    key: 'type',
-    form: {
-      placeholder: '请选择账单类型',
-      options: [
-        {
-          label: '支出',
-          value: 0,
-        },
-        {
-          label: '收入',
-          value: 1,
-        },
-      ],
-    },
-  },
-}
-const formList = ['time', 'type']
+
 function onFormSubmit(val) {
   console.log('onFormSubmit', val)
 }
