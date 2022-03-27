@@ -1,8 +1,6 @@
 <script>
-// import { ElContainer, ElAside, ElMain, ElDialog } from 'element-plus'
 export default {
   name: 'App',
-  // components: { ElContainer, ElAside, ElMain, ElDialog },
   setup() {},
 }
 </script>
@@ -23,12 +21,18 @@ export default {
 <style scoped>
 .aside-box {
   /* background: lightblue; */
-  min-height: 100vh;
+  height: 100vh;
   border-right: 1px solid #eee;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
 }
 .main-box {
   /* background: lightcoral; */
+  padding-left: 228px;
   min-height: 100vh;
-  padding: 0;
+  padding-top: 0;
+  padding-right: 0;
 }
 </style>

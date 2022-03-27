@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-between h-full">
+  <div class="flex flex-col justify-between h-screen">
     <div class="px-5 border-b pb-2">
       <div class="flex logo-box items-center pt-2">
         <img src="../assets/logo.png" class="w-6 h-6 mr-1" />
