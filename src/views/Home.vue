@@ -3,8 +3,7 @@ import AssetsPanel from '../components/AssetsPanel.vue'
 import SmartTable from '../components/SmartTable.vue'
 import BillChart from '../components/BillChart.vue'
 
-// import { columns } from './common'
-import { ref, computed, toRefs } from 'vue'
+import { ref, computed } from 'vue'
 import { useBillList } from '../hooks/index.js'
 import { getTotalValue } from '../utils/index.js'
 const filterValues = ref({ time: '', type: '' })

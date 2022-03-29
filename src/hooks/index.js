@@ -20,9 +20,9 @@ export const useBillList = () => {
   const categoryDict = ref([])
   const myColumns = ref(columns)
 
-  const updateBillList = async ({ time, type } = {}) => {
+  const updateBillList = async ({ time, type, category } = {}) => {
     isLoading.value = true
-    const res = await getBillList({ time, type })
+    const res = await getBillList({ time, type, category })
     const newRes = res.map((item) => ({ ...item, categoryName: categoryDict.value[item.category] })) // 添加分类名字
     billList.value = newRes
     isLoading.value = false

@@ -14,14 +14,16 @@ export const getCategoryList = async () => {
  * 获取账单列表
  * @returns {Promise<*>}
  */
-export const getBillList = async ({ time = '', type = '' } = {}) => {
+export const getBillList = async ({ time = '', type = '', category = '' } = {}) => {
+  console.log({ category })
   const typeStr = type === '' ? '' : `&& type == ${type}`
+  const categoryStr = category === '' ? '' : `&& category == '${category}'`
   let timeStr = ''
   if (time > 0) {
     const endTimestamp = dayjs(time).add(1, 'month').valueOf()
     timeStr = `&& time >= ${time} && time < ${endTimestamp}`
   }
-  const query = `*[_type == "bill" ${typeStr} ${timeStr}] | order(time desc) {
+  const query = `*[_type == "bill" ${typeStr} ${timeStr} ${categoryStr}] | order(time desc) {
     time,
     type,
     category,

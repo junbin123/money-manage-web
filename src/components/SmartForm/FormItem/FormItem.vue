@@ -34,7 +34,6 @@ export default {
         return this.value
       },
       set(val) {
-        console.log('FormItem---', val)
         this.$emit('onChange', {
           key: this.column.key,
           value: val,

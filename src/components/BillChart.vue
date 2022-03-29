@@ -11,7 +11,6 @@ let myChart = null
 onMounted(() => {
   ctx = document.getElementById('myChart').getContext('2d')
   myChart = new Chart(ctx, defaultConfig)
-  console.log('onMounted:', '-------')
 })
 
 /**
@@ -53,7 +52,6 @@ function getChartConfig(billList) {
 watch(
   () => props.billList,
   () => {
-    console.log('watch:billList', myChart.data)
     const { labels, incomeData, expendData } = getChartConfig(props.billList)
     myChart.data.labels = labels
     myChart.data.datasets[0].data = incomeData
