@@ -1,5 +1,6 @@
 import { onMounted, ref } from 'vue'
-import { getBillList } from '../api/index.js'
+import { getBillList, getCategoryList } from '../api/index.js'
+import { getTotalValue } from '../utils/index.js'
 
 /**
  * 账单列表hooks
@@ -26,16 +27,7 @@ export const useBillList = () => {
 
   onMounted(() => {
     updateBillList().then((res) => {
-      let income = 0
-      let expend = 0
-      res.forEach((item) => {
-        if (item.type === 0) {
-          expend += item.amount
-        }
-        if (item.type === 1) {
-          income += item.amount
-        }
-      })
+      const { income, expend } = getTotalValue(res)
       assetsData.value = {
         income: { value: income },
         expend: { value: expend },
@@ -52,3 +44,10 @@ export const useBillList = () => {
     isInitLoading,
   }
 }
+
+// export const useCategoryList = () => {
+//   const
+// const result   = getCategoryList().then(res=>{
+
+// })
+// }

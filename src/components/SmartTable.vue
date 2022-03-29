@@ -66,7 +66,7 @@ function onFormSubmit(val) {
 
 <style scoped></style>
 <template>
-  <div class="pb-4 pt-6">
+  <div class="pt-6">
     <SmartForm
       :value="filterValues"
       :columns="columns"
@@ -75,6 +75,7 @@ function onFormSubmit(val) {
       @onSubmit="onFormSubmit"
     />
   </div>
+  <slot name="middle"></slot>
   <div class="w-full px-4">
     <el-table :data="formateTableData(tableData)" border v-loading="isLoading">
       <el-table-column
