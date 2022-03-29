@@ -1,5 +1,5 @@
 <script setup>
-import AssetsPanle from '../components/AssetsPanel.vue'
+import AssetsPanel from '../components/AssetsPanel.vue'
 import SmartTable from '../components/SmartTable.vue'
 import { columns } from './common'
 import { ref } from 'vue'
@@ -9,7 +9,7 @@ const { billList, refreshListFunc, filterListFunc, isLoading } = useBillList()
 </script>
 
 <template>
-  <!-- <AssetsPanle /> -->
+  <AssetsPanel />
   <SmartTable
     :columns="columns"
     :tableData="billList"

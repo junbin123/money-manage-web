@@ -8,8 +8,8 @@ export const useBillList = () => {
   const billList = ref([])
   const isLoading = ref(true)
 
-  const updateBillList = ({ time, type } = {}) => {
-    isLoading.value = true
+  const updateBillList = ({ time, type, isMounted = false } = {}) => {
+    isLoading.value = isMounted ? false : true
     getBillList({ time, type }).then((res) => {
       billList.value = res
       isLoading.value = false
@@ -17,7 +17,7 @@ export const useBillList = () => {
   }
 
   onMounted(() => {
-    updateBillList()
+    updateBillList({ isMounted: true })
   })
   return {
     billList,

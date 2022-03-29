@@ -10,7 +10,7 @@
         <FormItem v-model="formValues[key]" :column="columns[key]" @onChange="handleChangeForm" />
       </el-form-item>
       <div class="form-item-box flex justify-end">
-        <el-button class="w-20" type="primary" @click="onSubmit">搜索</el-button>
+        <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading">搜索</el-button>
       </div>
     </el-form>
   </div>
@@ -34,6 +34,10 @@ export default {
     formList: {
       type: Array,
       default: () => [],
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
