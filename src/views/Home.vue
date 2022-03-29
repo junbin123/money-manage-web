@@ -2,6 +2,7 @@
 import AssetsPanel from '../components/AssetsPanel.vue'
 import SmartTable from '../components/SmartTable.vue'
 import BillChart from '../components/BillChart.vue'
+
 import { columns } from './common'
 import { ref, computed } from 'vue'
 import { useBillList } from '../hooks/index.js'
@@ -31,7 +32,11 @@ const totalValue = computed(() => getTotalValue(billList.value))
         <span class="text-[#e2e2e2] px-3">|</span>
         <span class="text-[#f23d3d]">支出: ￥{{ totalValue.expend }}</span>
       </div>
-      <BillChart :billList="billList" />
+    </template>
+    <template #chart>
+      <div v-loading="isLoading">
+        <BillChart :billList="billList" />
+      </div>
     </template>
   </SmartTable>
 </template>

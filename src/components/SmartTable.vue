@@ -76,14 +76,21 @@ function onFormSubmit(val) {
     />
   </div>
   <slot name="middle"></slot>
-  <div class="w-full px-4">
-    <el-table :data="formateTableData(tableData)" border v-loading="isLoading">
-      <el-table-column
-        v-for="tableKey in tableList"
-        :key="tableKey"
-        :prop="tableKey"
-        :label="columns[tableKey].label"
-      />
-    </el-table>
-  </div>
+  <el-tabs class="px-4">
+    <el-tab-pane label="列表" class="flex justify-center">
+      <div class="w-full max-w-2xl">
+        <el-table :data="formateTableData(tableData)" border v-loading="isLoading">
+          <el-table-column
+            v-for="tableKey in tableList"
+            :key="tableKey"
+            :prop="tableKey"
+            :label="columns[tableKey].label"
+          />
+        </el-table>
+      </div>
+    </el-tab-pane>
+    <el-tab-pane label="图表">
+      <slot name="chart"></slot>
+    </el-tab-pane>
+  </el-tabs>
 </template>
