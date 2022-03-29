@@ -21,7 +21,7 @@ export const getBillList = async ({ time = '', type = '' } = {}) => {
     const endTimestamp = dayjs(time).add(1, 'month').valueOf()
     timeStr = `&& time >= ${time} && time < ${endTimestamp}`
   }
-  const query = `*[_type == "bill" ${typeStr} ${timeStr}]{
+  const query = `*[_type == "bill" ${typeStr} ${timeStr}] | order(time desc) {
     time,
     type,
     category,

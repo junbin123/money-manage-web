@@ -1,7 +1,7 @@
 <script setup>
 import AssetsPanel from '../components/AssetsPanel.vue'
 import SmartTable from '../components/SmartTable.vue'
-import SmartChart from '../components/SmartChart.vue'
+import BillChart from '../components/BillChart.vue'
 import { columns } from './common'
 import { ref, computed } from 'vue'
 import { useBillList } from '../hooks/index.js'
@@ -31,7 +31,7 @@ const totalValue = computed(() => getTotalValue(billList.value))
         <span class="text-[#e2e2e2] px-3">|</span>
         <span class="text-[#f23d3d]">支出: ￥{{ totalValue.expend }}</span>
       </div>
-      <SmartChart />
+      <BillChart :billList="billList" />
     </template>
   </SmartTable>
 </template>
