@@ -13,12 +13,12 @@ export const columns = {
     },
   },
   type: {
-    label: '账单类型',
+    label: '收支类型',
     formType: 'select',
     key: 'type',
     form: {
       clearable: true,
-      placeholder: '请选择账单类型',
+      placeholder: '请选择收支类型',
       render: ({ type }) => ['支出', '收入'][type],
       options: [
         {
@@ -35,6 +35,12 @@ export const columns = {
   category: {
     label: '账单分类',
     key: 'category',
+    formType: 'select',
+    form: {
+      clearable: true,
+      placeholder: '请选择账单分类',
+      options: [],
+    },
   },
   categoryName: {
     label: '账单分类',

@@ -10,9 +10,9 @@
         <FormItem v-model="formValues[key]" :column="columns[key]" @onChange="handleChangeForm" />
       </el-form-item>
       <div class="pl-4">
-        <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading"
-          >搜索</el-button
-        >
+        <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading">
+          搜索
+        </el-button>
       </div>
     </el-form>
   </div>
@@ -58,7 +58,6 @@ export default {
   methods: {
     handleChangeForm({ key, value }) {
       console.log('handleChangeForm', { key, value })
-      // this.$emit('onSubmit', this.formValues)
     },
     onSubmit() {
       this.$emit('onSubmit', this.formValues)

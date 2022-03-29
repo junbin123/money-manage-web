@@ -4,14 +4,29 @@ import SmartTable from '../components/SmartTable.vue'
 import BillChart from '../components/BillChart.vue'
 
 import { columns } from './common'
-import { ref, computed } from 'vue'
+import { ref, computed, toRefs } from 'vue'
 import { useBillList } from '../hooks/index.js'
 import { getTotalValue } from '../utils/index.js'
 const filterValues = ref({ time: '', type: '' })
-const { billList, refreshListFunc, filterListFunc, isLoading, isInitLoading, assetsData } =
-  useBillList()
+const {
+  billList,
+  refreshListFunc,
+  filterListFunc,
+  isLoading,
+  isInitLoading,
+  assetsData,
+  categoryList,
+  categoryDict,
+} = useBillList()
 
 const totalValue = computed(() => getTotalValue(billList.value))
+
+// const newColumns = computed(() => {
+//   const res = { ...columns }
+//   const options = categoryList.value.map(({ label, value }) => ({ label, value }))
+//   res.category.form.options = options
+//   return res
+// })
 </script>
 
 <template>
@@ -19,8 +34,8 @@ const totalValue = computed(() => getTotalValue(billList.value))
   <SmartTable
     :columns="columns"
     :tableData="billList"
-    :tableList="['category', 'type', 'amount', 'time']"
-    :filterList="['time', 'type']"
+    :tableList="['categoryName', 'type', 'amount', 'time']"
+    :filterList="['time', 'type', 'category']"
     :filterValues="filterValues"
     :isLoading="isLoading"
     @onFilterFunc="filterListFunc"

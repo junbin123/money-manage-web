@@ -30,12 +30,12 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['onFilterFunc'])
-const columns = props.columns
+const currColumns = ref(props.columns)
 
 // 需要处理的key值，通过render函数
 const needFormateKeys = computed(() => {
   const res = props.tableList.filter((item) => {
-    const render = columns[item]?.form?.render
+    const render = currColumns.value[item]?.form?.render
     return isFunction(render)
   })
   return res
@@ -47,7 +47,7 @@ const needFormateKeys = computed(() => {
 function formateTableData(data) {
   const res = data.map((item) => {
     const itemTemp = needFormateKeys.value.reduce((res, key) => {
-      const render = columns[key].form.render
+      const render = currColumns.value[key].form.render
       const formatedValue = render(item)
       return {
         ...res,
@@ -69,7 +69,7 @@ function onFormSubmit(val) {
   <div class="pt-6">
     <SmartForm
       :value="filterValues"
-      :columns="columns"
+      :columns="currColumns"
       :formList="filterList"
       :isLoading="isLoading"
       @onSubmit="onFormSubmit"
@@ -84,7 +84,7 @@ function onFormSubmit(val) {
             v-for="tableKey in tableList"
             :key="tableKey"
             :prop="tableKey"
-            :label="columns[tableKey].label"
+            :label="currColumns[tableKey].label"
           />
         </el-table>
       </div>

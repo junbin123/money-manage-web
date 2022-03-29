@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import Chart from 'chart.js/auto'
 import { onMounted, watch } from 'vue'
 import { defaultConfig } from '../assets/chartConfig.js'
+
 const props = defineProps({ billList: Array })
 let ctx = null
 let myChart = null
@@ -13,6 +14,9 @@ onMounted(() => {
   console.log('onMounted:', '-------')
 })
 
+/**
+ *
+ */
 function getChartConfig(billList) {
   const timeList = billList.map((item) => dayjs(item.time).format('YYYY/MM/DD'))
   const labels = [...new Set(timeList)]
