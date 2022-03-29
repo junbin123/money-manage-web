@@ -8,7 +8,7 @@ export const columns = {
       type: 'month',
       placeholder: '请选择月份',
       render: ({ time }) => {
-        return  dayjs(time).format('YYYY/MM/DD HH:mm')
+        return dayjs(time).format('YYYY/MM/DD HH:mm')
       },
     },
   },
@@ -19,6 +19,7 @@ export const columns = {
     form: {
       clearable: true,
       placeholder: '请选择账单类型',
+      render: ({ type }) => ['支出', '收入'][type],
       options: [
         {
           label: '支出',
@@ -35,8 +36,17 @@ export const columns = {
     label: '账单分类',
     key: 'category',
   },
+  categoryName: {
+    label: '账单分类',
+    key: 'categoryName',
+  },
   amount: {
     label: '账单金额',
     key: 'amount',
+    form: {
+      render: ({ amount }) => {
+        return '￥' + amount
+      },
+    },
   },
 }

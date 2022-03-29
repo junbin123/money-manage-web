@@ -15,8 +15,13 @@ export const getCategoryList = async () => {
  * @returns {Promise<*>}
  */
 export const getBillList = async ({ time = '', type = '' } = {}) => {
-  console.log('请求接口', { time, type })
-  const query = `*[_type == "bill"]{
+  const typeStr = type === '' ? '' : `&& type == ${type}`
+  let timeStr = ''
+  if (time > 0) {
+    const endTimestamp = dayjs(time).add(1, 'month').valueOf()
+    timeStr = `&& time >= ${time} && time < ${endTimestamp}`
+  }
+  const query = `*[_type == "bill" ${typeStr} ${timeStr}]{
     time,
     type,
     category,
