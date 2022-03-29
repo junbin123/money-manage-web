@@ -31,6 +31,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['onFilterFunc'])
 const currColumns = ref(props.columns)
+const activeName = ref('table')
 
 // 需要处理的key值，通过render函数
 const needFormateKeys = computed(() => {
@@ -76,9 +77,9 @@ function onFormSubmit(val) {
     />
   </div>
   <slot name="middle"></slot>
-  <el-tabs class="px-4">
-    <el-tab-pane label="列表" class="flex justify-center">
-      <div class="w-full max-w-2xl">
+  <el-tabs class="px-4" v-model="activeName">
+    <el-tab-pane label="列表" class="flex justify-center" name="table">
+      <div class="w-full max-w-3xl">
         <el-table :data="formateTableData(tableData)" border v-loading="isLoading">
           <el-table-column
             v-for="tableKey in tableList"
@@ -89,7 +90,7 @@ function onFormSubmit(val) {
         </el-table>
       </div>
     </el-tab-pane>
-    <el-tab-pane label="图表">
+    <el-tab-pane label="图表" name="chart">
       <slot name="chart"></slot>
     </el-tab-pane>
   </el-tabs>

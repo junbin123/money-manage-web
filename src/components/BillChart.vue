@@ -1,74 +1,80 @@
 <script setup>
-import dayjs from 'dayjs'
 import Chart from 'chart.js/auto'
 import { onMounted, watch } from 'vue'
-import { defaultConfig } from '../assets/chartConfig.js'
+import { defaultConfig1, defaultConfig2 } from '../assets/chartConfig.js'
+import { getChartConfigForTime, quickSort } from '../utils/index.js'
 
 const props = defineProps({ billList: Array })
-let ctx = null
-let myChart = null
+let billChartTime = null
+let billChartCategory = null
 
 onMounted(() => {
-  ctx = document.getElementById('myChart').getContext('2d')
-  myChart = new Chart(ctx, defaultConfig)
+  const ctx1 = document.getElementById('billChartTime').getContext('2d')
+  const ctx2 = document.getElementById('billChartCategory').getContext('2d')
+  billChartTime = new Chart(ctx1, defaultConfig1)
+  billChartCategory = new Chart(ctx2, defaultConfig2)
 })
 
 /**
+ * 获取chart配置数据，绘制支出金额不同分类的柱状图，按金额大小排序
  *
  */
-function getChartConfig(billList) {
-  const timeList = billList.map((item) => dayjs(item.time).format('YYYY/MM/DD'))
-  const labels = [...new Set(timeList)]
-  const billDictByDay = {} // 保存每一天的收支金额
-  timeList.forEach((item, index) => {
-    if (!billDictByDay[item]) {
-      billDictByDay[item] = { income: 0, expend: 0 }
-    }
-    const { amount, type } = billList[index]
-    if (type === 0) {
-      // 支出
-      billDictByDay[item].expend += amount
-    } else if (type === 1) {
-      // 收入
-      billDictByDay[item].income += amount
+function getChartConfigForExpend(billList) {
+  const list = billList.filter((item) => item.type === 0)
+  const categoryDict = list.reduce((res, item) => {
+    const key = item.categoryName
+    res[key] = res[key] ? res[key] + item.amount : item.amount
+    return res
+  }, {})
+  const res = Object.keys(categoryDict).map((key) => {
+    return {
+      name: key,
+      value: categoryDict[key],
     }
   })
-
-  let incomeData = []
-  let expendData = []
-  labels.forEach((item) => {
-    const { income, expend } = billDictByDay[item]
-    incomeData.push(income)
-    expendData.push(-expend)
-  })
-
+  const sortList = quickSort(res, 'value', false)
   return {
-    labels,
-    incomeData,
-    expendData,
+    labels: sortList.map((item) => item.name),
+    data: sortList.map((item) => item.value),
   }
 }
 
 watch(
   () => props.billList,
   () => {
-    const { labels, incomeData, expendData } = getChartConfig(props.billList)
-    myChart.data.labels = labels
-    myChart.data.datasets[0].data = incomeData
-    myChart.data.datasets[1].data = expendData
-    myChart.update('active')
+    updateTimeChart()
+    updateExpendChart()
   }
 )
+
+// 更新每日收支图表
+function updateTimeChart() {
+  const { labels, incomeData, expendData } = getChartConfigForTime(props.billList)
+  billChartTime.data.labels = labels
+  billChartTime.data.datasets[0].data = incomeData
+  billChartTime.data.datasets[1].data = expendData
+  billChartTime.update('active')
+}
+
+// 更新支出金额图表
+function updateExpendChart() {
+  const { labels, data } = getChartConfigForExpend(props.billList)
+  billChartCategory.data.labels = labels
+  billChartCategory.data.datasets[0].data = data
+  billChartCategory.update('active')
+}
 </script>
 
 <style scoped>
-#myChart {
+.canvas-box {
   max-width: 800px;
-  max-height: 800px;
+  max-height: 600px;
 }
 </style>
 <template>
-  <div class="w-full flex justify-center">
-    <canvas id="myChart" width="600" height="600"></canvas>
+  <div class="w-full flex flex-col items-center">
+    <canvas id="billChartCategory" width="600" height="400" class="canvas-box"></canvas>
+    <div class="py-8"></div>
+    <canvas id="billChartTime" width="600" height="600" class="canvas-box"></canvas>
   </div>
 </template>

@@ -1,5 +1,4 @@
-const data = {
-  // labels: ['2019/12/16', '2019/12/17', '2019/12/18', '2019/12/16'],
+const data1 = {
   labels: [],
   datasets: [
     {
@@ -11,21 +10,50 @@ const data = {
     },
     {
       label: '支出',
-      // data: [-12, -19, -3, 5, 2, 3],
       data: [],
       borderColor: '#E74040',
       backgroundColor: '#EA7878',
     },
   ],
 }
-export const defaultConfig = {
+export const defaultConfig1 = {
   type: 'bar',
-  data,
+  data: data1,
   options: {
-    indexAxis: 'y',
+    indexAxis: 'x',
     elements: {
       bar: {
-        borderWidth: 2,
+        borderWidth: 1,
+      },
+    },
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
+  },
+}
+
+const data2 = {
+  labels: [],
+  datasets: [
+    {
+      label: '支出金额',
+      data: [],
+      borderColor: '#E74040',
+      backgroundColor: '#EA7878',
+    },
+  ],
+}
+
+export const defaultConfig2 = {
+  type: 'bar',
+  data: data2,
+  options: {
+    elements: {
+      bar: {
+        borderWidth: 1,
       },
     },
     responsive: true,
