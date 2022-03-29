@@ -1,11 +1,15 @@
+import dayjs from 'dayjs'
 export const columns = {
   time: {
-    label: '选择月份',
+    label: '日期',
     formType: 'date-picker',
     key: 'time',
     form: {
       type: 'month',
       placeholder: '请选择月份',
+      render: ({ time }) => {
+        return  dayjs(time).format('YYYY/MM/DD HH:mm')
+      },
     },
   },
   type: {

@@ -1,4 +1,5 @@
 import service from './service'
+import dayjs from 'dayjs'
 
 export const getCategoryList = async () => {
   const query = `*[_type == "category"]{
@@ -13,7 +14,8 @@ export const getCategoryList = async () => {
  * 获取账单列表
  * @returns {Promise<*>}
  */
-export const getBillList = async () => {
+export const getBillList = async ({ time = '', type = '' } = {}) => {
+  console.log('请求接口', { time, type })
   const query = `*[_type == "bill"]{
     time,
     type,

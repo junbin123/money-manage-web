@@ -28,7 +28,7 @@
         class="px-2 text-sm flex items-center hover:bg-slate-200 h-8 rounded-md mb-1"
         @click="ElMessage('coming soon...')"
       >
-        <div :class="['iconfont', item.icon]"></div>
+        <div :class="['iconfont', item.icon,'text-[#333333]']"></div>
         <div class="pl-1">{{ item.title }}</div>
       </div>
     </div>
@@ -70,6 +70,11 @@ const menuList = [
 const currentMenu = ref('home')
 
 const settingList = [
+  {
+    name: 'github',
+    title: 'Github',
+    icon: 'icon-github',
+  },
   {
     name: 'setting',
     title: '设置',
