@@ -76,13 +76,7 @@ function onFormSubmit(val) {
     />
   </div>
   <div class="w-full px-4">
-    <el-table
-      :data="formateTableData(tableData)"
-      border
-      v-loading="isLoading"
-      element-loading-svg-view-box="-10, -10, 50, 50"
-      element-loading-background="rgba(0, 0, 0, 0.8)"
-    >
+    <el-table :data="formateTableData(tableData)" border v-loading="isLoading">
       <el-table-column
         v-for="tableKey in tableList"
         :key="tableKey"

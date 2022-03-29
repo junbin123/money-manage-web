@@ -5,11 +5,12 @@ import { columns } from './common'
 import { ref } from 'vue'
 import { useBillList } from '../hooks/index.js'
 const filterValues = ref({ time: '', type: '' })
-const { billList, refreshListFunc, filterListFunc, isLoading } = useBillList()
+const { billList, refreshListFunc, filterListFunc, isLoading, isInitLoading, assetsData } =
+  useBillList()
 </script>
 
 <template>
-  <AssetsPanel />
+  <AssetsPanel :assetsData="assetsData" :isLoading="isInitLoading" />
   <SmartTable
     :columns="columns"
     :tableData="billList"

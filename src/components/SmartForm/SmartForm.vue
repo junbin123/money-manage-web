@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <el-form label-width="7rem" class="flex flex-wrap flex-col">
+    <el-form label-width="5rem" class="flex flex-wrap">
       <el-form-item
         v-for="key in formList"
         :key="key"
@@ -9,8 +9,10 @@
       >
         <FormItem v-model="formValues[key]" :column="columns[key]" @onChange="handleChangeForm" />
       </el-form-item>
-      <div class="form-item-box flex justify-end">
-        <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading">搜索</el-button>
+      <div class="pl-4">
+        <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading"
+          >搜索</el-button
+        >
       </div>
     </el-form>
   </div>
@@ -70,7 +72,7 @@ export default {
   width: 100%;
 }
 .form-item-box {
-  width: 20rem;
+  width: 18rem;
   min-width: 14rem;
 }
 </style>
