@@ -1,6 +1,7 @@
 import { onMounted, ref } from 'vue'
 import { getBillList, getCategoryList } from '../api/index.js'
 import { getTotalValue } from '../utils/index.js'
+import { columns } from '../assets/columns.js'
 
 /**
  * 账单列表hooks
@@ -17,6 +18,7 @@ export const useBillList = () => {
   })
   const categoryList = ref([])
   const categoryDict = ref([])
+  const myColumns = ref(columns)
 
   const updateBillList = async ({ time, type } = {}) => {
     isLoading.value = true
@@ -31,7 +33,10 @@ export const useBillList = () => {
   onMounted(() => {
     getCategoryList()
       .then((res) => {
-        categoryList.value = res.map((item) => ({ ...item, label: item.name, value: item.id }))
+        const list = res.map((item) => ({ ...item, label: item.name, value: item.id }))
+        // TODO:categoryList可去掉
+        categoryList.value = list
+        myColumns.value.category.form.options = list
         categoryDict.value = res.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.name }), {})
         return updateBillList()
       })
@@ -53,12 +58,6 @@ export const useBillList = () => {
     isInitLoading,
     categoryList,
     categoryDict,
+    columns: myColumns,
   }
 }
-
-// export const useCategoryList = () => {
-//   const
-// const result   = getCategoryList().then(res=>{
-
-// })
-// }

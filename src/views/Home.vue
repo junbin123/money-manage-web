@@ -3,7 +3,7 @@ import AssetsPanel from '../components/AssetsPanel.vue'
 import SmartTable from '../components/SmartTable.vue'
 import BillChart from '../components/BillChart.vue'
 
-import { columns } from './common'
+// import { columns } from './common'
 import { ref, computed, toRefs } from 'vue'
 import { useBillList } from '../hooks/index.js'
 import { getTotalValue } from '../utils/index.js'
@@ -15,18 +15,11 @@ const {
   isLoading,
   isInitLoading,
   assetsData,
-  categoryList,
   categoryDict,
+  columns,
 } = useBillList()
 
 const totalValue = computed(() => getTotalValue(billList.value))
-
-// const newColumns = computed(() => {
-//   const res = { ...columns }
-//   const options = categoryList.value.map(({ label, value }) => ({ label, value }))
-//   res.category.form.options = options
-//   return res
-// })
 </script>
 
 <template>
