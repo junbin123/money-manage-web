@@ -10,11 +10,11 @@
       >
         <FormItem v-model="formValues[key]" :column="columns[key]" @onChange="handleChangeForm" />
       </el-form-item>
-      <div class="pl-4" v-if="isSubmitButton">
+      <el-form-item v-if="isSubmitButton">
         <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading">
           搜索
         </el-button>
-      </div>
+      </el-form-item>
     </el-form>
   </div>
 </template>

@@ -1,31 +1,58 @@
 <template>
   <Teleport to="body">
-    <el-dialog
-      v-model="showPop"
-      center
-      width="600px"
-      class="max-w-full"
-      @close="$emit('dialogClose')"
-    >
-      <SmartForm :value="inputValues" :columns="columnsTemp" :formList="createList" />
-      <template #footer>
-        <span class="dialog-footer bg-slate-400"> hello </span>
-      </template>
-    </el-dialog>
+    <div class="dialog-box">
+      <el-dialog
+        title="添加账单"
+        v-model="showPop"
+        center
+        width="600px"
+        @close="$emit('dialogClose')"
+      >
+        <SmartForm :value="inputValues" :columns="columnsTemp" :formList="createList" />
+        <template #footer>
+          <div class="w-full flex justify-end">
+            <el-button plain @click="showPop = false">取消</el-button>
+            <el-button type="primary" @click="onCreate" :loading="isLoading">添加账单</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
   </Teleport>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import SmartForm from './SmartForm/SmartForm.vue'
+import { ElMessage } from 'element-plus'
+import { computed } from 'vue'
 import { useProp } from '@/hooks'
-const emit = defineEmits(['dialogClose', 'onSubmit'])
+
+const emit = defineEmits(['dialogClose', 'onCreate'])
 const props = defineProps({
   createValues: Object,
   createList: Array,
   columns: Object,
   isShow: Boolean,
+  isLoading: Boolean,
 })
+const showPop = useProp('isShow')
+const inputValues = useProp('createValues')
+
+function onCreate() {
+  const { category, amount, createTime } = inputValues.value
+  console.log({ category, amount, createTime })
+  if (!(category && amount && createTime)) {
+    ElMessage.error('请填写账单信息')
+    return
+  }
+  const money = Math.round(parseFloat(amount) * 100) / 100
+  if (isNaN(money)) {
+    ElMessage.error('请输入正确的金额')
+    inputValues.value.amount = ''
+    return
+  }
+  inputValues.value.amount = money
+  emit('onCreate', inputValues)
+}
 
 const columnsTemp = computed(() => {
   const res = {}
@@ -40,30 +67,6 @@ const columnsTemp = computed(() => {
   })
   return res
 })
-
-const showPop = useProp('isShow')
-const inputValues = useProp('createValues')
 </script>
 
-<style scoped>
-.dialog ::v-deep(.el-dialog__header) {
-  border-bottom: 1px solid #e6e6e6;
-  padding: 24px;
-}
-
-.dialog ::v-deep(.el-dialog__footer) {
-  padding: 48px;
-}
-
-.dialog ::v-deep(.el-dialog__headerbtn) {
-  font-size: 24px;
-}
-
-.dialog ::v-deep(.el-dialog--center .el-dialog__body) {
-  padding: 8px 0;
-}
-
-.dialog-container {
-  background: lightgreen;
-}
-</style>
+<style scoped></style>

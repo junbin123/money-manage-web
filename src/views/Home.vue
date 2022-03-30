@@ -27,11 +27,15 @@ const createValues = ref({
   category: 'bsn20th0k2o',
   createTime: dayjs().valueOf(),
 })
+
+function onCreateBillRecord() {
+  const value = { ...createValues.value }
+  console.log({ value })
+}
 </script>
 
 <template>
   {{ showPop ? 'show' : 'hide' }}
-  <!-- {{ categoryList }} -->
   {{ createValues }}
   <AssetsPanel :assetsData="assetsData" :isLoading="isInitLoading" @onCreate="showPop = true" />
   <SmartTable
@@ -62,6 +66,7 @@ const createValues = ref({
     v-model:createValues="createValues"
     :columns="columns"
     :createList="['category', 'amount', 'createTime']"
+    @onCreate="onCreateBillRecord"
   />
 </template>
 <style scoped></style>
