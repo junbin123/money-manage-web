@@ -73,7 +73,6 @@ export default {
 
   methods: {
     handleChangeForm({ key, value }) {
-      console.log('onChange', { key, value })
       this.$emit('onChange', this.formValues)
     },
     onSubmit() {

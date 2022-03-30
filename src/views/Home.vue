@@ -6,37 +6,41 @@ import BillChart from '../components/BillChart.vue'
 
 import dayjs from 'dayjs'
 import { ref, computed } from 'vue'
-import { useBillList } from '../hooks/index.js'
+import { useBillList, useCreateBill } from '../hooks/index.js'
+
 import { getTotalValue } from '../utils/index.js'
 const filterValues = ref({ time: '', type: '' })
 const {
   billList,
-  refreshListFunc,
+  refreshFunc,
   filterListFunc,
   isLoading,
   isInitLoading,
   assetsData,
   categoryDict,
-  categoryList,
   columns,
 } = useBillList()
 
+const { createLoading, addBillFunc } = useCreateBill(categoryDict)
+
 const totalValue = computed(() => getTotalValue(billList.value))
-const showPop = ref(true)
+const showPop = ref(false)
 const createValues = ref({
   category: 'bsn20th0k2o',
   createTime: dayjs().valueOf(),
 })
 
-function onCreateBillRecord() {
-  const value = { ...createValues.value }
-  console.log({ value })
+function onCreateBillRecord(value) {
+  addBillFunc(value).then((res) => {
+    console.log(res, '================')
+    showPop.value = false
+    createValues.value.amount = ''
+    refreshFunc()
+  })
 }
 </script>
 
 <template>
-  {{ showPop ? 'show' : 'hide' }}
-  {{ createValues }}
   <AssetsPanel :assetsData="assetsData" :isLoading="isInitLoading" @onCreate="showPop = true" />
   <SmartTable
     :columns="columns"
@@ -66,6 +70,7 @@ function onCreateBillRecord() {
     v-model:createValues="createValues"
     :columns="columns"
     :createList="['category', 'amount', 'createTime']"
+    :isLoading="createLoading"
     @onCreate="onCreateBillRecord"
   />
 </template>

@@ -51,7 +51,7 @@ function onCreate() {
     return
   }
   inputValues.value.amount = money
-  emit('onCreate', inputValues)
+  emit('onCreate', inputValues.value)
 }
 
 const columnsTemp = computed(() => {

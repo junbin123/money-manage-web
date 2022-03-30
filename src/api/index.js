@@ -7,9 +7,10 @@ export const getCategoryList = async () => {
     name,
     type
   }`
-  const res = await service.get(`?query=${encodeURIComponent(query)}`)
+  const res = await service.get(`/query/production?query=${encodeURIComponent(query)}`)
   return res.result
 }
+
 /**
  * 获取账单列表
  * @returns {Promise<*>}
@@ -29,6 +30,19 @@ export const getBillList = async ({ time = '', type = '', category = '' } = {}) 
     category,
     amount,
   }`
-  const res = await service.get(`?query=${encodeURIComponent(query)}`)
+  const res = await service.get(`/query/production?query=${encodeURIComponent(query)}`)
   return res.result
+}
+
+export const addBillRecord = (data) => {
+  return service.post('/mutate/production', {
+    mutations: [
+      {
+        create: {
+          _type: 'bill',
+          ...data,
+        },
+      },
+    ],
+  })
 }
