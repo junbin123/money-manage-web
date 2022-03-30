@@ -34,12 +34,16 @@ export const getBillList = async ({ time = '', type = '', category = '' } = {}) 
 
 // 添加账单记录
 export const addBillRecord = (data) => {
+  const now = dayjs()
+  const diff = now.unix() - dayjs(now.format('YYYY-MM-DD')).unix()
+  const time = diff * 1000 + data.time
   return service.post('/mutate/production', {
     mutations: [
       {
         create: {
           _type: 'bill',
           ...data,
+          time,
         },
       },
     ],

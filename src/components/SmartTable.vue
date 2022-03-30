@@ -67,7 +67,7 @@ function onFormSubmit(val) {
 
 <style scoped></style>
 <template>
-  <div class="pt-6">
+  <div class="pt-6 pb-6">
     <SmartForm
       :value="filterValues"
       :columns="currColumns"

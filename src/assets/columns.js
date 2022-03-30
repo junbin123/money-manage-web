@@ -17,7 +17,7 @@ export const columns = {
     formType: 'date-picker',
     key: 'createTime',
     form: {
-      type: 'day',
+      type: 'date',
       placeholder: '请选择日期',
     },
   },

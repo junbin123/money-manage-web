@@ -1,5 +1,10 @@
 <template>
-  <component class="w-full" :is="componentName" v-model="currentValue" :attributes="column.form" />
+  <component
+    class="w-full"
+    :is="componentName"
+    v-model="currentValue"
+    :attributes="column.form"
+  />
 </template>
 
 <script>

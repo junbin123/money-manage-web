@@ -16,7 +16,9 @@ export default {
           <RouterView />
         </div>
       </ElMain>
-      <div class="tabbar w-screen fixed block sm:hidden flex justify-center items-center border-t bg-slate-50">
+      <div
+        class="tabbar w-screen fixed block sm:hidden flex justify-center items-center border-t bg-slate-50"
+      >
         <a
           target="_blank"
           href="https://github.com/junbin123/money-manage-web"
@@ -41,8 +43,7 @@ export default {
 }
 .main-box {
   min-height: 100vh;
-  padding-top: 0;
-  padding-right: 0;
+  padding: 0;
 }
 .tabbar {
   height: 60px;

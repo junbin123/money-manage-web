@@ -1,20 +1,27 @@
 <template>
-  <div class="wrapper">
-    <el-form label-width="5rem" class="flex flex-wrap" :model="formValues">
+  <div class="form-wrapper">
+    <el-form
+      label-width="5rem"
+      class="flex flex-wrap"
+      :model="formValues"
+      :class="{ 'flex-col': layout === 'column' }"
+    >
       <el-form-item
         v-for="key in formList"
         :key="key"
         :label="columns[key].label"
+        :class="{ 'w-72': layout === 'row' }"
         class="form-item-box"
         :required="!!columns[key].form.required"
       >
         <FormItem v-model="formValues[key]" :column="columns[key]" @onChange="handleChangeForm" />
       </el-form-item>
-      <el-form-item v-if="isSubmitButton">
+
+      <div v-if="isSubmitButton" :class="{ 'pl-6': layout === 'row' }">
         <el-button class="w-20" type="primary" @click="onSubmit" :loading="isLoading">
           搜索
         </el-button>
-      </el-form-item>
+      </div>
     </el-form>
   </div>
 </template>
@@ -46,6 +53,11 @@ export default {
     isSubmitButton: {
       type: Boolean,
       default: false,
+    },
+    layout: {
+      // 布局
+      type: String,
+      default: 'row', // column
     },
   },
   data() {
@@ -88,7 +100,6 @@ export default {
   width: 100%;
 }
 .form-item-box {
-  width: 18rem;
   min-width: 14rem;
 }
 </style>

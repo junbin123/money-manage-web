@@ -40,3 +40,10 @@ export default {
   },
 }
 </script>
+
+<style>
+/* 解决el-date-picker不100%撑开 */
+.form-wrapper .el-date-editor--day {
+  width: 100% !important;
+}
+</style>
