@@ -4,12 +4,12 @@ import App from './App.vue'
 import { routes } from './routes.js'
 import 'element-plus/dist/index.css'
 import './iconfont.css'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const app = createApp(App)
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 })
 

@@ -72,4 +72,8 @@ const columnsTemp = computed(() => {
   </Teleport>
 </template>
 
-<style scoped></style>
+<style scoped>
+.dialog-box {
+  width: 800px;
+}
+</style>

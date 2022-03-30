@@ -34,14 +34,14 @@ const props = defineProps({
   <div class="panel-box border-b px-4 pt-8">
     <div class="flex flex-wrap pt-3 pb-2" v-loading="isLoading">
       <div
-        class="assets-card text-base mr-2 mb-2 border rounded-md w-40 p-2 min-w-[100px] bg-[#3894FF] text-white flex items-center justify-center cursor-pointer hover:bg-[#3894FF] hover:bg-[#60A5F5]"
+        class="assets-card sm:w-40 h-20 text-base mr-2 mb-2 border rounded-md w-full p-2 min-w-[100px] bg-[#3894FF] text-white flex items-center justify-center cursor-pointer hover:bg-[#3894FF] hover:bg-[#60A5F5]"
         @click="$emit('onCreate')"
       >
         <div class="iconfont icon-add" style="font-size: 1.25rem; color: white"></div>
         添加账单
       </div>
       <div
-        class="assets-card mr-2 mb-2 border rounded-md w-40 p-2 min-w-[100px]"
+        class="assets-card mr-2 mb-2 border rounded-md p-2 min-w-[100px] h-20 sm:w-40 w-full"
         v-for="item in assetsList"
         :key="item.name"
       >

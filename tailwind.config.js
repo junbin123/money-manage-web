@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
       },
+      padding: {
+        '228px': '228px',
+      },
     },
   },
   plugins: [

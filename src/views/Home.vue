@@ -72,6 +72,7 @@ function onCreateBillRecord(value) {
       </div>
     </template>
   </SmartTable>
+  <div class="py-10"></div>
   <CreateDialog
     v-model:isShow="showPop"
     v-model:createValues="createValues"
