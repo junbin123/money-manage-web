@@ -25,7 +25,7 @@ export const useBillList = () => {
    * @param {number} param0.time 事件戳筛选项
    * @param {number} param0.type 收支类型筛选项
    * @param {string} param0.category 分类筛选项
-   * @returns {Promise}
+   * @returns {Promise<[]>}  账单列表
    */
   const updateBillList = async ({ time, type, category } = {}) => {
     isLoading.value = true
@@ -72,8 +72,9 @@ export const useBillList = () => {
   function refreshFunc() {
     isLoading.value = true
     isInitLoading.value = true
-    updateBillList().then((res) => {
+    return updateBillList().then((res) => {
       updateAssetsData(res)
+      return Promise.resolve(res)
     })
   }
   return {
@@ -90,8 +91,8 @@ export const useBillList = () => {
 
 /**
  * 把prop包装成可写的计算属性
- * @param {*} name
- * @param {*} cb
+ * @param {string} name
+ * @param {function} cb
  * @returns
  */
 export const useProp = (name = 'modelValue', cb) => {
@@ -110,11 +111,12 @@ export const useProp = (name = 'modelValue', cb) => {
 }
 
 /**
- *
+ * 添加账单记录hook
+ * @param {Object} categoryDict 分类字典
  */
-
 export const useCreateBill = (categoryDict) => {
   const createLoading = ref(false)
+
   function addBillFunc(inputValues) {
     createLoading.value = true
     const { amount, category, createTime: time } = inputValues
@@ -129,6 +131,7 @@ export const useCreateBill = (categoryDict) => {
       return Promise.resolve(res)
     })
   }
+  
   return {
     createLoading,
     addBillFunc,

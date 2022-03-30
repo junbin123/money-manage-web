@@ -30,12 +30,19 @@ const createValues = ref({
   createTime: dayjs().valueOf(),
 })
 
+/**
+ * 添加账单方法
+ * @param {number} value.createTime 时间戳
+ * @param {string} value.category 分类id
+ * @param {number} value.amount 金额
+ */
 function onCreateBillRecord(value) {
   addBillFunc(value).then((res) => {
-    console.log(res, '================')
     showPop.value = false
     createValues.value.amount = ''
-    refreshFunc()
+    refreshFunc().then(() => {
+      filterValues.value = { time: '', type: '' }
+    })
   })
 }
 </script>
