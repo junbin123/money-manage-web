@@ -5,8 +5,6 @@
         <img src="../assets/logo.png" class="w-6 h-6 mr-1" />
         <div class="text-lg">记账工具</div>
       </div>
-      <el-button size="large" :icon="Plus" class="w-full">添加账单</el-button>
-
       <div class="pt-4 cursor-pointer">
         <div
           v-for="item in menuList"
@@ -28,7 +26,7 @@
         class="px-2 text-sm flex items-center hover:bg-slate-200 h-8 rounded-md mb-1"
         @click="ElMessage('coming soon...')"
       >
-        <div :class="['iconfont', item.icon,'text-[#333333]']"></div>
+        <div :class="['iconfont', item.icon, 'text-[#333333]']"></div>
         <div class="pl-1">{{ item.title }}</div>
       </div>
     </div>
@@ -36,10 +34,10 @@
 </template>
 
 <script setup>
-import { Plus } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+
 const router = useRouter()
 const menuList = [
   {
@@ -68,7 +66,6 @@ const menuList = [
   },
 ]
 const currentMenu = ref('home')
-
 const settingList = [
   {
     name: 'github',
@@ -96,6 +93,7 @@ function handleMenu(item) {
   currentMenu.value = item.name
   router.push(item.path)
 }
+
 </script>
 
 <style scoped>

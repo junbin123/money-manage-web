@@ -73,6 +73,7 @@ function onFormSubmit(val) {
       :columns="currColumns"
       :formList="filterList"
       :isLoading="isLoading"
+      :isSubmitButton="true"
       @onSubmit="onFormSubmit"
     />
   </div>

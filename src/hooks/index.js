@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, getCurrentInstance, computed } from 'vue'
 import { getBillList, getCategoryList } from '../api/index.js'
 import { getTotalValue } from '../utils/index.js'
 import { columns } from '../assets/columns.js'
@@ -60,4 +60,25 @@ export const useBillList = () => {
     categoryDict,
     columns: myColumns,
   }
+}
+
+/**
+ * 把prop包装成可写的计算属性
+ * @param {*} name 
+ * @param {*} cb 
+ * @returns 
+ */
+export const useProp = (name = 'modelValue', cb) => {
+  const vm = getCurrentInstance()
+  const { emit, proxy = { $props: {} } } = vm
+  return computed({
+    get: () => {
+      const prop = proxy.$props[name]
+      return prop
+    },
+    set: (newVal) => {
+      emit(`update:${name}`, newVal)
+      cb && cb(newVal)
+    },
+  })
 }

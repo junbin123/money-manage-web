@@ -12,6 +12,15 @@ export const columns = {
       },
     },
   },
+  createTime: {
+    label: '创建日期',
+    formType: 'date-picker',
+    key: 'createTime',
+    form: {
+      type: 'day',
+      placeholder: '请选择日期',
+    },
+  },
   type: {
     label: '收支类型',
     formType: 'select',
@@ -49,7 +58,9 @@ export const columns = {
   amount: {
     label: '账单金额',
     key: 'amount',
+    formType: 'input',
     form: {
+      placeholder: '请输入账单金额',
       render: ({ amount }) => {
         return '￥' + amount
       },
