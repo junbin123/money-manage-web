@@ -1,6 +1,4 @@
-<script setup>
-import ButtonRepo from '@/components/ButtonRepo.vue'
-</script>
+<script setup></script>
 
 <template>
   <div>dashboard</div>

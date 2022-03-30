@@ -1,26 +1,6 @@
-<template>
-  <Teleport to="body">
-    <div class="dialog-box">
-      <el-dialog
-        title="添加账单"
-        v-model="showPop"
-        center
-        width="600px"
-        @close="$emit('dialogClose')"
-      >
-        <SmartForm :value="inputValues" :columns="columnsTemp" :formList="createList" />
-        <template #footer>
-          <div class="w-full flex justify-end">
-            <el-button plain @click="showPop = false">取消</el-button>
-            <el-button type="primary" @click="onCreate" :loading="isLoading">添加账单</el-button>
-          </div>
-        </template>
-      </el-dialog>
-    </div>
-  </Teleport>
-</template>
-
 <script setup>
+// 添加账单弹窗组件
+
 import SmartForm from './SmartForm/SmartForm.vue'
 import { ElMessage } from 'element-plus'
 import { computed } from 'vue'
@@ -37,6 +17,7 @@ const props = defineProps({
 const showPop = useProp('isShow')
 const inputValues = useProp('createValues')
 
+// 点击添加按钮方法
 function onCreate() {
   const { category, amount, createTime } = inputValues.value
   console.log({ category, amount, createTime })
@@ -68,5 +49,27 @@ const columnsTemp = computed(() => {
   return res
 })
 </script>
+
+<template>
+  <Teleport to="body">
+    <div class="dialog-box">
+      <el-dialog
+        title="添加账单"
+        v-model="showPop"
+        center
+        width="600px"
+        @close="$emit('dialogClose')"
+      >
+        <SmartForm :value="inputValues" :columns="columnsTemp" :formList="createList" />
+        <template #footer>
+          <div class="w-full flex justify-end">
+            <el-button plain @click="showPop = false">取消</el-button>
+            <el-button type="primary" @click="onCreate" :loading="isLoading">添加账单</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
+  </Teleport>
+</template>
 
 <style scoped></style>

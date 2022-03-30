@@ -1,4 +1,6 @@
 <script setup>
+// 封装chart.js的账单图表业务组件
+
 import Chart from 'chart.js/auto'
 import { onMounted, watch } from 'vue'
 import { defaultConfig1, defaultConfig2 } from '../assets/chartConfig.js'
@@ -16,8 +18,8 @@ onMounted(() => {
 })
 
 /**
- * 获取chart配置数据，绘制支出金额不同分类的柱状图，按金额大小排序
- *
+ * 获取chart配置数据，绘制支出金额在不同分类的柱状图，按金额大小排序
+ * @param {Array} billList 账单列表
  */
 function getChartConfigForExpend(billList) {
   const list = billList.filter((item) => item.type === 0)

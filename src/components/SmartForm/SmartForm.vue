@@ -20,6 +20,7 @@
 </template>
 
 <script>
+// 对element表单组件的封装
 import FormItem from './FormItem/FormItem.vue'
 export default {
   components: {

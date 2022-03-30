@@ -1,4 +1,6 @@
 <script setup>
+// 总收支数据面板组件
+
 const assetsList = [
   {
     title: '总资产',

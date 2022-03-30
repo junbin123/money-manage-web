@@ -1,6 +1,7 @@
 import service from './service'
 import dayjs from 'dayjs'
 
+// 获取分类列表
 export const getCategoryList = async () => {
   const query = `*[_type == "category"]{
     id,
@@ -11,10 +12,7 @@ export const getCategoryList = async () => {
   return res.result
 }
 
-/**
- * 获取账单列表
- * @returns {Promise<*>}
- */
+// 获取账单列表
 export const getBillList = async ({ time = '', type = '', category = '' } = {}) => {
   console.log({ category })
   const typeStr = type === '' ? '' : `&& type == ${type}`
@@ -34,6 +32,7 @@ export const getBillList = async ({ time = '', type = '', category = '' } = {}) 
   return res.result
 }
 
+// 添加账单记录
 export const addBillRecord = (data) => {
   return service.post('/mutate/production', {
     mutations: [
