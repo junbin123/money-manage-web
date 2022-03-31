@@ -7,6 +7,9 @@ export default {
 
 <template>
   <div>
+    <div class="w-screen h-20 bg-[#F6CCCB] flex justify-center px-8 items-center text-center text-base sm:hidden">
+      ⚠️ 检测到你在小屏幕设备访问，建议使用电脑访问体验更佳
+    </div>
     <ElContainer>
       <ElAside width="228px" class="aside-box hidden sm:block">
         <Sidebar />
