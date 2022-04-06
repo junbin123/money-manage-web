@@ -41,7 +41,7 @@ const props = defineProps({
         添加账单
       </div>
       <div
-        class="assets-card mx-1 mb-2 border rounded-md p-2 min-w-[100px] h-20 sm:w-40 w-full"
+        class="assets-card mx-1 mb-2 border rounded-md p-2 min-w-[10rem] h-20 sm:w-fit w-full"
         v-for="item in assetsList"
         :key="item.name"
       >
